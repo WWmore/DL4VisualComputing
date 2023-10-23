@@ -1,0 +1,99 @@
+problems:
+PyTorch is unable to detect your GPU
+
+conda create -n DLVC python pytorch torchvision cudatoolkit=11.8 jupyterlab nb_conda pillow matplotlib scikit-learn scikit-image h5py -c pytorch
+conda activate DLVC
+
+conda install -c pytorch pytorch-cuda
+(failed)
+conda install -c anaconda cudnn
+
+conda install pytorch=*=*cuda* cudatoolkit -c pytorch
+(very important)
+
+python -m torch.utils.collect_env
+
+python -c "import torch; print(torch.cuda.is_available())"   
+(True)
+python -c "import torch; print(torch.cuda.device_count())"
+(1)
+
+the package versions are:
+python=3.8.18 torch=1.8.1 pytorch=1.8.1 torchvision=0.15.2 cudatoolkit=10.1.243 cudnn=7.6.5 
+jupyterlab=6.5.4 nb_conda=2.2.1 pillow=9.4.0 matplotlib=3.7.2 scikit-learn=1.3.0 scikit-image=0.19.3
+
+run error: ModuleNotFoundError: No module named 'torch.ao'
+conda update pytorch torchvision
+(again change back to False and 0)
+
+conda install -c pytorch pytorch==1.8.1
+(now cuda is True)
+
+-------below is 3rd version--------
+
+conda create -n AI python=3.7 
+conda activate AI
+conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
+conda install -c anaconda cudnn
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 jupyterlab nb_conda pillow matplotlib scikit-learn scikit-image h5py -c pytorch -c nvidia -c conda-forge
+
+
+conda install pytorch torchvision torchaudio pytorch-cuda jupyterlab nb_conda pillow matplotlib scikit-learn scikit-image h5py -c pytorch -c nvidia -c conda-forge
+
+
+
+--------below is 2nd version, still no cuda for jupyter---
+conda create --name DLVC pytorch torchvision cudatoolkit=10.0 jupyterlab nb_conda pillow matplotlib scikit-learn scikit-image h5py -c pytorch
+
+conda activate DLVC
+
+
+
+conda create --name DL pytorch torchvision cudatoolkit=11.8 jupyterlab nb_conda pillow matplotlib scikit-learn scikit-image h5py -c pytorch
+
+conda activate DL
+
+python -c "import torch; print(torch.cuda.is_available())"   
+(should be True)
+python -c "import torch; print(torch.cuda.device_count())"
+(should be not 0)
+
+conda install -c pytorch pytorch-cuda
+(failed)
+try:
+conda install pytorch=*=*cuda* cudatoolkit -c pytorch
+
+conda install -c anaconda cudnn
+
+
+---------below are old---------------
+
+
+conda create -n AI
+conda activate AI
+
+
+
+conda install pytorch torchvision cudatoolkit=12
+
+
+
+python -c "import torch; print(torch.cuda.is_available())"   
+(should be True)
+
+
+nvidia-smi
+(shows cudatookit=12)
+
+
+conda install -c nvidia cuda-toolkit
+
+
+conda install -c conda-forge matplotlib
+
+
+
+python -m torch.utils.collect_env
+(check packages)
+
+
